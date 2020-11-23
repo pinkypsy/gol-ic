@@ -10,6 +10,9 @@ public class Procedural1 {
 //        invertRec(array,0);
         System.out.println("====");
         System.out.println(Arrays.toString(array));
+
+
+
     }
 
     public static void invertIter(int [] input){
@@ -29,13 +32,13 @@ public class Procedural1 {
         }
     }
 
-    public static void invertRec(int [] input, int i){
-        if (i < input.length / 2){
+    public static void invertRec(int [] input, int i) {
+        if (i < input.length / 2) {
             int temp = input[input.length - i - 1];
             input[input.length - i - 1] = input[i];
             input[i] = temp;
-            invertRec(input,++i);
+            invertRec(input, ++i);
         }
-
     }
+
 }
