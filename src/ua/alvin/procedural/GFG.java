@@ -9,16 +9,10 @@ class GFG {
 
     public static void main(String[] args) {
 //        System.out.println(deleteFromStart(123,3));
-        System.out.println(deleteDigit1(504695, 5));
+        System.out.println(deleteDigit1(5831, 3));
     }
 
-    static int deleteDigit1(int num, int digitToRemove) {
-        int digitCount = 0;
-        int tempNum = num;
-        while (tempNum > 0) {
-            tempNum /= 10;
-            digitCount++;
-        }
+    static int deleteDigit1(int originalNumber, int digitToRemove) {
 
 /*        // Get the number of digits
         int digitCount = (int) Math.log10(num) + 1;*/
@@ -26,10 +20,22 @@ class GFG {
         // Declare a variable
         // to form the reverse resultant number
         int revolvedTempNum = 0;
+int tempShiftPos = originalNumber;
+int digitCount = 0;
+        while (tempShiftPos != 0) {
+            digitCount++;
+            tempShiftPos = tempShiftPos / 10;
+        }
+
+        System.out.println(digitCount);
 
         // Loop with the number
 
-        int shiftPos = num;
+
+
+
+
+        int shiftPos = originalNumber;
         while (shiftPos != 0) {
             int currentDigit = shiftPos % 10;
             shiftPos = shiftPos / 10;
@@ -37,11 +43,9 @@ class GFG {
             if (currentDigit == digitToRemove) {
                 continue;
             } else {
-
                 revolvedTempNum = (revolvedTempNum * 10) + currentDigit;
             }
         }
-
 
         // Declare a variable
         // to form the resultant number
@@ -49,18 +53,16 @@ class GFG {
 
         // Loop with the number
         while (revolvedTempNum != 0) {
-            int firstDigit = (int) (revolvedTempNum / Math.pow(10, digitCount - 1));
 
-            if (firstDigit == 0) {
-                resultNum = (resultNum * 10) + (revolvedTempNum % 10);
-
-                revolvedTempNum = revolvedTempNum / 10;
-                continue;
-            }
             resultNum = (resultNum * 10) + (revolvedTempNum % 10);
 
             revolvedTempNum = revolvedTempNum / 10;
         }
+    /*    int lastDigit = originalNumber % 10;
+
+        if (lastDigit == 0) {
+            resultNum = resultNum * 10;
+        }*/
 
         // Return the resultant number
         return resultNum;
