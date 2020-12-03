@@ -40,7 +40,8 @@ public class QuadraticEquation {
         int pos = 0;
 
             while (pos < expression.length()){
-                if (Character.isDigit(expression.charAt(pos))) {
+                if (
+                        Character.isDigit(expression.charAt(pos))) {
                     pos++;
                 }
                 first += expression.substring(0,pos);
