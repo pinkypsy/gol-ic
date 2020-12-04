@@ -19,7 +19,8 @@ class GFG {
 
         // Declare a variable
         // to form the reverse resultant number
-        int revolvedTempNum = 0;
+        int revolvedTempNumber = 0;
+        int revolvedTempNumberNextPos;
 int tempShiftPos = originalNumber;
 int digitCount = 0;
         while (tempShiftPos != 0) {
@@ -37,26 +38,29 @@ int digitCount = 0;
 
         int shiftPos = originalNumber;
         while (shiftPos != 0) {
+            revolvedTempNumberNextPos = revolvedTempNumber * 10;
             int currentDigit = shiftPos % 10;
             shiftPos = shiftPos / 10;
 
             if (currentDigit == digitToRemove) {
                 continue;
             } else {
-                revolvedTempNum = (revolvedTempNum * 10) + currentDigit;
+                revolvedTempNumber = revolvedTempNumberNextPos + currentDigit;
             }
         }
 
         // Declare a variable
         // to form the resultant number
         int resultNum = 0;
+        int resultNumberNextPosition;
 
         // Loop with the number
-        while (revolvedTempNum != 0) {
+        while (revolvedTempNumber != 0) {
+            resultNumberNextPosition = resultNum * 10;
 
-            resultNum = (resultNum * 10) + (revolvedTempNum % 10);
+            resultNum = resultNumberNextPosition + (revolvedTempNumber % 10);
 
-            revolvedTempNum = revolvedTempNum / 10;
+            revolvedTempNumber = revolvedTempNumber / 10;
         }
     /*    int lastDigit = originalNumber % 10;
 
