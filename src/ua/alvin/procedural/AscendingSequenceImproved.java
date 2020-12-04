@@ -6,11 +6,14 @@ public class AscendingSequenceImproved {
         longestAscendingSubsequence(12342435);
         longestAscendingSubsequence(245123);
         longestAscendingSubsequence(752338338);
-        longestAscendingSubsequence(1324512345);
+        longestAscendingSubsequence(1678912345);
         longestAscendingSubsequence(1235891234);
+        longestAscendingSubsequence(1234186789);
     }
 
+
     static void longestAscendingSubsequence(int originalNumber) {
+        //longest sequence of consecutive natural digits
         int tempShiftPos = originalNumber;
         int numberOfDigits = 0;
         int max = 0;
@@ -45,7 +48,7 @@ public class AscendingSequenceImproved {
                 currentDigit = originalNumber % 10;
             }
             coefficientOfShifting = coefficientOfShifting / 10;
-            if (tempSequence % 10 > currentDigit) {
+            if (tempSequence % 10 > currentDigit || ((tempSequence % 10) + 1) != currentDigit) {
                 tempSequence = 0;
             }
             if (currentDigit == nextDigit - 1) {
