@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class Procedural3 {
     public static void main(String[] args) {
 
-        long l = (byte) 1234_564_890L;
+    /*    long l = (byte) 1234_564_890L;
         int x = (byte) 0b1000_1100_1010;
         double m = (byte) 110_987_654_6299.123_34;
         float f = (byte) l++ + 10 + ++x - (float) m;
@@ -20,9 +20,13 @@ public class Procedural3 {
 
         inverseAndReverseRecursion(1);
         System.out.println();
-        System.out.println(" = " + factorial(5));
+        System.out.println(" = " + factorial(5));*/
 
-        System.out.println(fibonacci(5));
+
+        long begin = System.currentTimeMillis();
+        System.out.println(fibonacci(40));
+        long end = System.currentTimeMillis();
+        System.out.println(end - begin);
     }
 
     static void invertArrayReccur(int [] input, int i){
@@ -58,13 +62,10 @@ public class Procedural3 {
     }
 
     static int fibonacci(int n){
-        if (n < 2){
+        if (n <= 2){
             return 1;
         }
         return fibonacci(n - 2) + fibonacci(n - 1);
-/*        return (n < 2)
-                ? 1
-                : fibonacci(n - 2) + fibonacci(n - 1);*/
     }
 
 }

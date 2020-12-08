@@ -37,6 +37,7 @@ public class LongestIncrSequenceInArray {
         longestIncreasingSubsequence(new int[]{1,2,3,3,2,4,6});
         longestIncreasingSubsequence(new int[]{6,5,3,2/*,3,4,5*/});
         longestIncreasingSubsequence(new int[]{2,4,6,1,2,3});
+        System.out.println(findIterative(new int[]{2,4,6,1,2,3}));
     }
 
     public static void longestIncreasingSubsequence(int[] inputArray) {
@@ -81,6 +82,33 @@ public class LongestIncrSequenceInArray {
             }
         }
         System.out.println(resultSubsequences);
+    }
+
+    public static int findIterative(int[] numbers) {
+        //validateInput(numbers);
+        if (numbers.length == 0) {
+            return 0;
+        }
+
+        boolean consecutiveSequenceFound = false;
+        int result = 0;
+        int start = 0, end = 0;
+        for (int i = 1; i < numbers.length; i++) {
+            if (numbers[i - 1] < numbers[i]) {
+                end = i;
+            } else {
+                start = i;
+            }
+            if (end - start > result) {
+                consecutiveSequenceFound = true;
+                result = end - start;
+            }
+        }
+        if (consecutiveSequenceFound) {
+            return result + 1;
+        } else {
+            return result;
+        }
     }
     public static int lengthOfLIS(int[] nums) {
         if(nums==null || nums.length==0)

@@ -29,6 +29,8 @@ public class Procedural1 {
             input[input.length - i - 1] = input[i];
             input[i] = temp;
             System.out.println(Arrays.toString(input));
+
+
         }
     }
 

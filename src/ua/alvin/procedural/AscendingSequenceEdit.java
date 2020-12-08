@@ -10,8 +10,8 @@ public class AscendingSequenceEdit {
         System.out.println(longestAscendingSubsequence(1235891234));
         System.out.println(longestAscendingSubsequence(1234186789));
         System.out.println(longestAscendingSubsequence(1238956789));
-
     }
+
 
     static int longestAscendingSubsequence(int inputSequence) {
         //longest sequence of consecutive natural digits
