@@ -5,9 +5,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class IcebergTask {
-    static Map<Integer, Integer> map = new HashMap<>();
+
     //    static int size = 0;
-    static int icebergSize;
+    private static int icebergSize;
 
     public static void main(String[] args) {
 
@@ -35,59 +35,67 @@ public class IcebergTask {
                 {1, 1, 0, 0, 1, 0}};
 */
 
-        int[][] workTable = new int[originalTable.length][originalTable[0].length];
+        int[][] copiedTable = getCopiedTable(originalTable);
 
-        for (int row = 0; row < originalTable.length; row++) {
-            for (int column = 0; column < originalTable[row].length; column++) {
-                workTable[row][column] = originalTable[row][column];
-            }
-            System.out.println();
+        showTable(originalTable);
+        showTable(copiedTable);
+
+        countIcebergs(copiedTable);
+
+
+
+    }
+
+    private static int[][] getCopiedTable(int[][] originalTable) {
+        int[][] copy = new int[originalTable.length][originalTable[0].length];
+        for (int rowNumber = 0; rowNumber < originalTable.length; rowNumber++) {
+            System.arraycopy(originalTable[rowNumber], 0, copy[rowNumber], 0, originalTable[rowNumber].length);
         }
-
-//        System.out.println("Result: " + countIslands(workTable));
-        gridState(originalTable);
-        gridState(workTable);
-
-        countIcebergs(workTable);
-        System.out.println(map);
-
+        return copy;
     }
 
     public static void countIcebergs(int[][] table) {
+        Map<Integer, Integer> countedIcebergs = new HashMap<>();
+        int icebergSize = 0;
+
         for (int rowNumber = 0; rowNumber < table.length; rowNumber++) {
             for (int columnNumber = 0; columnNumber < table[rowNumber].length; columnNumber++) {
-                icebergSize = 0;
+//                icebergSize = 0;
                 if (table[rowNumber][columnNumber] == 1) {
-                    icebergSize = shiftAndComputeSize(table, rowNumber, columnNumber);
-                    map.putIfAbsent(icebergSize, 0);
-                    int icebergCount = map.get(icebergSize);
-                    map.put(icebergSize, ++icebergCount);
+                    icebergSize = shiftAndComputeSize(table, rowNumber, columnNumber,icebergSize);
+                    countedIcebergs.putIfAbsent(icebergSize, 0);
+                    int icebergCount = countedIcebergs.get(icebergSize);
+                    countedIcebergs.put(icebergSize, ++icebergCount);
                 }
             }
         }
+        System.out.println(countedIcebergs);
+        //TODO print result
     }
 
-    public static int shiftAndComputeSize(int[][] table, int rowNumber, int columnNumber) {
+    private static int shiftAndComputeSize(int[][] table, int rowNumber, int columnNumber, int icebergSize) {
+//        int icebergSize = 0;
+//        icebergSize++;
         if (rowNumber < 0 || columnNumber < 0 || rowNumber >= table.length || columnNumber >= table[0].length || table[rowNumber][columnNumber] == 0) {
             return 0;
         }
 
         table[rowNumber][columnNumber] = 0;
 
-        shiftAndComputeSize(table, rowNumber - 1, columnNumber);
-        shiftAndComputeSize(table, rowNumber, columnNumber + 1);
-        shiftAndComputeSize(table, rowNumber + 1, columnNumber);
-        shiftAndComputeSize(table, rowNumber, columnNumber - 1);
+        shiftAndComputeSize(table, rowNumber - 1, columnNumber,icebergSize);
+        shiftAndComputeSize(table, rowNumber, columnNumber + 1,icebergSize);
+        shiftAndComputeSize(table, rowNumber + 1, columnNumber,icebergSize);
+        shiftAndComputeSize(table, rowNumber, columnNumber - 1,icebergSize);
 
-        icebergSize++;
-        return icebergSize;
+
+        return ++icebergSize;
     }
 
-    static void gridState(int[][] grid) {
-        System.out.println("Grid:");
-        for (int row = 0; row < grid.length; row++) {
-            for (int column = 0; column < grid[row].length; column++) {
-                System.out.print(" " + grid[row][column]);
+    private static void showTable(int[][] table) {
+        System.out.println("Table:");
+        for (int[] rows : table) {
+            for (int column : rows) {
+                System.out.print(" " + column);
             }
             System.out.println();
         }
